@@ -4,7 +4,6 @@ namespace DocxConversion\Model\Converter;
 
 use Xmlps\Logger\Logger;
 use Xmlps\Command\Command;
-
 use Manager\Model\Converter\AbstractConverter;
 
 /**
@@ -18,7 +17,7 @@ class Unoconv extends AbstractConverter
     protected $filter;
     protected $inputFile;
     protected $outputFile;
-    protected $verbose = true;
+    protected $verbose = false;
 
     /**
      * Constructor
@@ -39,7 +38,8 @@ class Unoconv extends AbstractConverter
     }
 
     /**
-     * Set the filter to use for the conversion
+     * Set the filter to use for the conversion.  Note that unoconv’s
+     * default is pdf, if no filter is made explicit.
      *
      * @param mixed $filter Conversion filter to use (i.e. docx, pdf)
      *
@@ -80,13 +80,13 @@ class Unoconv extends AbstractConverter
     /**
      * Set whether unoconv should be verbose or not
      *
-     * @param Bool $verbose
+     * @param boolean $verbose
      *
      * @return void
      */
-    public function setVerbose(Bool $verbose)
+    public function setVerbose($verbose)
     {
-        $this->verbose = $verbose;
+        $this->verbose = (true === $verbose);
     }
 
     /**
@@ -135,9 +135,17 @@ class Unoconv extends AbstractConverter
         $this->status = $command->isSuccess();
         $this->output = $command->getOutputString();
 
-        $this->logger->debugTranslate(
-            'docxconversion.unoconv.executeCommandOutputLog',
-            $this->getOutput()
-        );
+        // Report success or failure.
+        if ($this->status) {
+            $this->logger->debugTranslate(
+                'docxconversion.unoconv.executeCommandOutputLog',
+                $this->getOutput()
+                );
+        } else {
+            $this->logger->errorTranslate(
+                'docxconversion.unoconv.executeFailure',
+                $this->getOutput()
+            );
+        }
     }
 }

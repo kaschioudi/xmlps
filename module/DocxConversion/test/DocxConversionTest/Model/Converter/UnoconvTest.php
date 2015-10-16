@@ -48,6 +48,7 @@ class UnoconvTest extends ModelTest
         $this->unoconv->setInputFile($this->testInputFile);
         $this->unoconv->setOutputFile($this->testOutputFile);
         $this->unoconv->setFilter('docx7');
+        $this->unoconv->setVerbose(true);
         $this->unoconv->convert();
 
         $this->assertSame($this->unoconv->getStatus(), true);
