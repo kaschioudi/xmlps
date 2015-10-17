@@ -3,7 +3,7 @@
 namespace DocxConversion\Model\Queue\Job;
 
 use Manager\Model\Queue\Job\AbstractQueueJob;
-use Manager\Entity\Job;
+use Manager\Entity\Job as MgrJob;
 
 /**
  * Generates DocX documents
@@ -13,10 +13,10 @@ class DocxJob extends AbstractQueueJob
     /**
      * Generate document
      *
-     * @param Job $job
-     * @return Job $job
+     * @param MgrJob $job
+     * @return MgrJob $job
      */
-    public function process(Job $job)
+    public function process(MgrJob $job)
     {
         $unoconv = $this->sm->get('DocxConversion\Model\Converter\Unoconv');
 
