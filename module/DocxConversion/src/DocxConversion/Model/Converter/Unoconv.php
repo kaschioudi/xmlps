@@ -142,7 +142,7 @@ class Unoconv extends AbstractConverter
                 $this->getOutput()
                 );
         } else {
-            $this->logger->errorTranslate(
+            $this->logger->errTranslate(
                 'docxconversion.unoconv.executeFailure',
                 $this->getOutput()
             );
