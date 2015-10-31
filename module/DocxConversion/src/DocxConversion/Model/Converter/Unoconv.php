@@ -7,25 +7,50 @@ use Xmlps\Command\Command;
 use Manager\Model\Converter\AbstractConverter;
 
 /**
- * Converts documents using Open/Libreoffice and unoconv
+ * Converts documents using Open/LibreOffice and unoconv
  */
 class Unoconv extends AbstractConverter
 {
+    /**
+     * @var mixed $config
+     */
     protected $config;
+    /**
+     * @var Logger $logger
+     */
     protected $logger;
 
+    /**
+     * Keyword for the conversion target; will be passed to unoconv
+     * with the -f switch if set.  Should be a string, or null.  The
+     * default value for the unoconv command is 'pdf'.  'unoconv
+     * --show' will list valid format codes.  Commonly-used values are
+     * 'docx', 'docx7', 'pdf'.
+     * @var mixed $filter
+     */
     protected $filter;
+    /**
+     * @var mixed $inputFile
+     */
     protected $inputFile;
+    /**
+     * @var mixed $outputFile
+     */
     protected $outputFile;
+    /**
+     * @var boolean $verbose
+     */
     protected $verbose = false;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mixed $config Unoconv config
      * @param Logger $logger Logger
      *
      * @return void
+     * 
+     * @throws Exception if unoconv command is not configured
      */
     public function __construct($config, Logger $logger)
     {
@@ -38,10 +63,10 @@ class Unoconv extends AbstractConverter
     }
 
     /**
-     * Set the filter to use for the conversion.  Note that unoconv’s
-     * default is pdf, if no filter is made explicit.
+     * Set the filter to use for the conversion.
      *
-     * @param mixed $filter Conversion filter to use (i.e. docx, pdf)
+     * @param mixed $filter Conversion filter to use; see member
+     * documentation
      *
      * @return void
      */
@@ -70,6 +95,7 @@ class Unoconv extends AbstractConverter
      * Set the output file
      *
      * @param mixed $outputFile
+     * 
      * @return void
      */
     public function setOutputFile($outputFile)
