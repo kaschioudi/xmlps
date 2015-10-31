@@ -45,11 +45,11 @@ class Unoconv extends AbstractConverter
     /**
      * Constructor.
      *
-     * @param mixed $config Unoconv config
+     * @param mixed $config unoconv config
      * @param Logger $logger Logger
      *
      * @return void
-     * 
+     *
      * @throws Exception if unoconv command is not configured
      */
     public function __construct($config, Logger $logger)
@@ -63,7 +63,7 @@ class Unoconv extends AbstractConverter
     }
 
     /**
-     * Set the filter to use for the conversion.
+     * Set the filter to use for the conversion
      *
      * @param mixed $filter Conversion filter to use; see member
      * documentation
@@ -81,6 +81,8 @@ class Unoconv extends AbstractConverter
      * @param mixed $inputFile
      *
      * @return void
+     *
+     * @throws Exception if input file is not found
      */
     public function setInputFile($inputFile)
     {
@@ -95,7 +97,7 @@ class Unoconv extends AbstractConverter
      * Set the output file
      *
      * @param mixed $outputFile
-     * 
+     *
      * @return void
      */
     public function setOutputFile($outputFile)
@@ -119,6 +121,8 @@ class Unoconv extends AbstractConverter
      * Convert the document
      *
      * @return void
+     *
+     * @throws Exception if inputFile or outputFile are not set
      */
     public function convert()
     {
