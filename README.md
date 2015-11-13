@@ -17,6 +17,8 @@ Module Description
  * Receives conversion jobs
  * Job list
  * Handles job distribution to queues
+* PathFinder
+ * Determines which conversion path to take
 * DocxConversion
  * Converts documents to DocX format
 * WpPdfConversion
@@ -133,7 +135,7 @@ Installation
   # rm var/cache/zfcache-ea/*
   ```
 
-* Initialize the database
+* Initialize the database (you may need to manually create an 'xmlps' database first)
 
   ```
   # vendor/doctrine/doctrine-module/bin/doctrine-module orm:schema-tool:update --force

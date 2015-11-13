@@ -1,15 +1,19 @@
 <?php
 
-namespace DocxConversionTest\Model\Queue;
+namespace PathFinderTest\Model\Queue;
 
 use Xmlps\UnitTest\ModelTest;
 use Manager\Entity\Job;
-use DocxConversion\Model\Queue\Job\DocxJob;
+use PathFinder\Model\Queue\Job\PathFinderJob;
 use Manager\Model\DAO\DocumentDAO; // for documentation
 use Manager\Model\DAO\JobDAO; // for documentation
 use User\Model\DAO\UserDAO; // for documentation
 
-class DocxJobTest extends ModelTest
+/**
+ * Tests the conversion path selection job when input is in a word
+ * processing format
+ */
+class PathFinderWpJobTest extends ModelTest
 {
     /**
      * @var DocumentDAO $document
@@ -26,20 +30,21 @@ class DocxJobTest extends ModelTest
 
     /**
      * Instance of the class to test.
-     * @var DocxJob $docxJob
+     * @var PathFinderJob $pathFinderJob
      */
-    protected $docxJob;
+    protected $pathFinderJob;
 
     /**
-     * Location of the input file to copy for testing.
+     * Location of the word processing input file to copy for testing.
      * @var string $testAsset
      */
-    protected $testAsset = 'module/DocxConversion/test/assets/document.odt';
+    protected $testAsset = 'module/PathFinder/test/assets/document.odt';
     /**
      * Destination of the input asset, to be copied before conversion.
+     * Omission of extension is deliberate to avoid giving type hints.
      * @var string $testFile
      */
-    protected $testFile = '/tmp/UNITTEST_document.odt';
+    protected $testFile = '/tmp/UNITTEST_document';
 
     /**
      * Initialize the test
@@ -49,49 +54,54 @@ class DocxJobTest extends ModelTest
     public function setUp() {
         parent::setUp();
 
-        $this->docxJob = new DocxJob;
-        $this->docxJob->setServiceLocator($this->sm);
+        $this->pathFinderJob = new PathFinderJob;
+        $this->pathFinderJob->setServiceLocator($this->sm);
 
         $this->resetTestData();
     }
 
     /**
-     * Test if the conversion works properly
+     * Test if the selection works properly
      *
      * @return void
      */
-    public function testConversion()
+    public function testWpPathFinding()
     {
         // We ought to be starting in unconverted stage, as this is
         // our first pipeline stage.  This is more a test of the test
         // scaffold than of the conversion itself.
         $this->assertSame(
             $this->job->conversionStage,
-            JOB_CONVERSION_STAGE_WP_IN
-            );
+            JOB_CONVERSION_STAGE_UNCONVERTED
+        );
         $this->assertSame(
             $this->document->conversionStage,
-            JOB_CONVERSION_STAGE_WP_IN
-            );
+            JOB_CONVERSION_STAGE_UNCONVERTED
+        );
 
         // Note how many documents the job has before conversion...
         $documentCount = count($this->job->documents);
 
-        // Do the conversion.
-        $this->docxJob->process($this->job);
+        // Do the pathfinding.
+        $this->pathFinderJob->process($this->job);
 
-        // We now ought to have one more document than previously.
+        // We now ought to have exactly the same number of documents.
         $this->assertSame(
-            $documentCount + 1,
+            $documentCount,
             count($this->job->documents)
-            );
+        );
 
-        // The stage ought to have changed to indicate that we’re
-        // done.
+        // The stage now ought to indicate that we are following the
+        // WP path, and the document itself ought to be marked
+        // accordingly.
         $this->assertSame(
             $this->job->conversionStage,
-            JOB_CONVERSION_STAGE_DOCX
-            );
+            JOB_CONVERSION_STAGE_WP_IN
+        );
+        $this->assertSame(
+            $this->document->conversionStage,
+            JOB_CONVERSION_STAGE_WP_IN
+        );
     }
 
     /**
@@ -109,7 +119,7 @@ class DocxJobTest extends ModelTest
         $this->job = $this->createTestJob(
             array(
                 'user' => $this->user,
-                'conversionStage' => JOB_CONVERSION_STAGE_WP_IN
+                'conversionStage' => JOB_CONVERSION_STAGE_UNCONVERTED
             )
         );
 
@@ -118,7 +128,7 @@ class DocxJobTest extends ModelTest
             array(
                 'job' => $this->job,
                 'path' => $this->testFile,
-                'conversionStage' => $this->job->conversionStage
+                'conversionStage' => $this->job->conversionStage,
             )
         );
         $this->job->documents[] = $this->document;

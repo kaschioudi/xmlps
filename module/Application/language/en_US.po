@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: XMLPS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-16 19:24-0600\n"
-"PO-Revision-Date: 2015-10-16 19:24-0600\n"
+"POT-Creation-Date: 2015-11-13 01:06-0600\n"
+"PO-Revision-Date: 2015-11-13 01:06-0600\n"
 "Last-Translator: Christopher R. Maden <crism@maden.org>\n"
 "Language-Team: PKP\n"
 "Language: en_US\n"
@@ -274,19 +274,19 @@ msgstr ""
 "meTypeset output:\n"
 "%s"
 
-#: module/DocxConversion/src/DocxConversion/Model/Converter/Unoconv.php:129
+#: module/DocxConversion/src/DocxConversion/Model/Converter/Unoconv.php:159
 msgid "docxconversion.unoconv.executeCommandLog"
 msgstr ""
 "Unoconv is executing:\n"
 "%s "
 
-#: module/DocxConversion/src/DocxConversion/Model/Converter/Unoconv.php:141
+#: module/DocxConversion/src/DocxConversion/Model/Converter/Unoconv.php:171
 msgid "docxconversion.unoconv.executeCommandOutputLog"
 msgstr ""
 "Unoconf output:\n"
 "%s"
 
-#: module/DocxConversion/src/DocxConversion/Model/Converter/Unoconv.php:146
+#: module/DocxConversion/src/DocxConversion/Model/Converter/Unoconv.php:176
 msgid "docxconversion.unoconv.executeFailure"
 msgstr ""
 "Unoconv failed with output:\n"
@@ -622,31 +622,31 @@ msgstr ""
 "CERMINE output:\n"
 "%s"
 
-#: module/MergeXMLOutputs/src/MergeXMLOutputs/Model/Converter/Merge.php:92
+#: module/MergeXMLOutputs/src/MergeXMLOutputs/Model/Converter/Merge.php:93
 msgid "mergexmloutputs.converter.startLog"
 msgstr "Starting meTypeset/CERMINE merge operation."
 
-#: module/MergeXMLOutputs/src/MergeXMLOutputs/Model/Converter/Merge.php:98
+#: module/MergeXMLOutputs/src/MergeXMLOutputs/Model/Converter/Merge.php:99
 msgid "mergexmloutputs.converter.finishLog"
 msgstr "Merge of meTypeset and CERMINE output complete."
 
-#: module/MergeXMLOutputs/src/MergeXMLOutputs/Model/Converter/Merge.php:113
+#: module/MergeXMLOutputs/src/MergeXMLOutputs/Model/Converter/Merge.php:114
 msgid "mergexmloutputs.converter.merge.noMeTypesetDomLog"
 msgstr "Unable to read meTypeset output file."
 
-#: module/MergeXMLOutputs/src/MergeXMLOutputs/Model/Converter/Merge.php:124
+#: module/MergeXMLOutputs/src/MergeXMLOutputs/Model/Converter/Merge.php:125
 msgid "mergexmloutputs.converter.merge.noCermineDomLog"
 msgstr "Unable to read CERMINE output file."
 
-#: module/MergeXMLOutputs/src/MergeXMLOutputs/Model/Converter/Merge.php:134
+#: module/MergeXMLOutputs/src/MergeXMLOutputs/Model/Converter/Merge.php:135
 msgid "mergexmloutputs.converter.merge.noMeTypesetFront"
 msgstr "meTypeset output file has no front element."
 
-#: module/MergeXMLOutputs/src/MergeXMLOutputs/Model/Converter/Merge.php:144
+#: module/MergeXMLOutputs/src/MergeXMLOutputs/Model/Converter/Merge.php:145
 msgid "mergexmloutputs.converter.merge.noCermineFront"
 msgstr "CERMINE output file has no front element."
 
-#: module/MergeXMLOutputs/src/MergeXMLOutputs/Model/Converter/Merge.php:157
+#: module/MergeXMLOutputs/src/MergeXMLOutputs/Model/Converter/Merge.php:158
 msgid "mergexmloutputs.converter.merge.replacementFail"
 msgstr "Failed to replace meTypeset front element with CERMINE front element."
 
@@ -677,37 +677,43 @@ msgstr ""
 msgid "manager.job.noEntriesFound"
 msgstr "No jobs found."
 
-#: module/Manager/src/Manager/Entity/Job.php:144
+#: module/Manager/src/Manager/Entity/Job.php:154
 msgid "manager.job.status.pending"
 msgstr "Pending"
 
-#: module/Manager/src/Manager/Entity/Job.php:145
+#: module/Manager/src/Manager/Entity/Job.php:155
 msgid "manager.job.status.processing"
 msgstr "Processing"
 
-#: module/Manager/src/Manager/Entity/Job.php:146
+#: module/Manager/src/Manager/Entity/Job.php:156
 msgid "manager.job.status.completed"
 msgstr "Completed"
 
-#: module/Manager/src/Manager/Entity/Job.php:147
+#: module/Manager/src/Manager/Entity/Job.php:157
 msgid "manager.job.status.failed"
 msgstr "Failed"
 
-#: module/Manager/src/Manager/Model/Queue/Manager.php:81
+#: module/Manager/src/Manager/Model/Queue/Manager.php:82
 msgid "manager.queue.receivedProcessingLog"
 msgstr "Processing queue received job (%d)"
 
-#: module/Manager/src/Manager/Model/Queue/Manager.php:117
+#: module/Manager/src/Manager/Model/Queue/Manager.php:118
 msgid "manager.queue.jobFailedLog"
 msgstr "Job %d failed."
 
-#: module/Manager/src/Manager/Model/Queue/Manager.php:198
+#: module/Manager/src/Manager/Model/Queue/Manager.php:217
 msgid "manager.queue.jobCompletedLog"
 msgstr "Job %d is completed"
 
-#: module/Manager/src/Manager/Model/Queue/Manager.php:222
+#: module/Manager/src/Manager/Model/Queue/Manager.php:241
 msgid "manager.queue.receivedQueueLog"
 msgstr "Queued job (%d) in queue %s"
+
+#: module/Manager/src/Manager/Model/Queue/Job/AbstractQueueJob.php:104
+msgid "queuejob.execute.exception"
+msgstr ""
+"A worker threw an exception in %s:\n"
+"%s"
 
 #: vendor/xmlps/library/Event/Handler/AclDispatchHandler.php:62
 msgid "application.acl.notAuthorized"
@@ -722,10 +728,11 @@ msgstr "PKP XML Parsing Service"
 msgid "application.index.sidebarDescription"
 msgstr ""
 "This is a new, experimental service being developed by the Public Knowledge "
-"Project to provide unsupervised conversion of Word/compatible inputs to "
-"production-ready NLM3 XML, HTML, and PDF. This service is currently under "
-"active development and output will not be perfect. Contact axfelix@gmail.com "
-"with any questions, and watch this space over the coming months."
+"Project to provide unsupervised conversion of Word/compatible and PDF input "
+"to production-ready NLM3 XML, HTML, and PDF. This service is currently under "
+"active development and output will not be perfect. Contact Alex at "
+"garnett@sfu.ca with any questions, and watch this space over the coming "
+"months."
 
 #: module/User/view/_sideBar.phtml:6
 msgid "application.index.sidebarTips"
@@ -742,8 +749,7 @@ msgstr ""
 msgid "application.index.sidebarTipsCitation"
 msgstr ""
 "Ideally, citations (in your document that point to your bibliography) are "
-"formatted as numbers in brackets, e.g. [10] or [11,12,13]. Consequently, "
-"bracketed numbers should not occur in your document for any other reason."
+"formatted as numbers in brackets, e.g. [10] or [11,12,13]."
 
 #: module/User/view/_sideBar.phtml:11
 msgid "application.index.sidebarTipsCitationReference"
@@ -755,8 +761,7 @@ msgstr ""
 #: module/User/view/_sideBar.phtml:12
 msgid "application.index.sidebarTipsBibliography"
 msgstr ""
-"Any bibliography entries which are not cited in your document are reported "
-"in a warning section at the bottom."
+"Code and API documentation are available at http://github.com/pkp/xmlps"
 
 #: module/User/view/user/user/settings.phtml:2
 msgid "user.settings.title"
@@ -1029,7 +1034,7 @@ msgstr "User"
 msgid "manager.job.uploadFileName"
 msgstr "Upload File Name"
 
-#: module/Manager/view/manager/manager/list.phtml:37
+#: module/Manager/view/manager/manager/list.phtml:43
 msgid "application.generic.details"
 msgstr "Details"
 
